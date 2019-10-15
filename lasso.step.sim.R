@@ -125,11 +125,10 @@ boostrap.mse = function(times, data, seed){
 
 # define a data frame for mean square loss
 loss.data = data.frame(
-  "Correlation" = r,
   "Stepwise" = sapply(sim.data.list, function(x) boostrap.mse(100, x, 123))[1,],
   "Lasso" = sapply(sim.data.list, function(x) boostrap.mse(100, x, 123))[2,]
 )
-
+names(loss.data) = r
 
 #====#====#====#====#====#============== variable selection with stepwise and lasso based on bootstrapping
 #====#====#====#====#====#==== function for variable selection using bootstrapping
@@ -194,14 +193,12 @@ stepwise.TPR = sapply(1:3, function(x) mean(stepwise.metrics[[x]][,1]))
 stepwise.TNR = sapply(1:3, function(x) mean(stepwise.metrics[[x]][,2]))
 
 metrics.data = data.frame(
-  "Correlation" = r,
   "Lasso_TPR" = sapply(1:3, function(x) mean(lasso.metrics[[x]][,1])),
   "stepwise_TPR" = sapply(1:3, function(x) mean(stepwise.metrics[[x]][,1])),
   "Lasso_TNR" = sapply(1:3, function(x) mean(lasso.metrics[[x]][,2])),
   "stepwise_TNR" = sapply(1:3, function(x) mean(stepwise.metrics[[x]][,2]))
 )
-
-
+names(metrics.data) = r
 
 
 
